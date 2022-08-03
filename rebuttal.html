@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Hugo 0.62.2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- <link rel="alternate" href="index.xml" type="application/rss+xml" title="PopMAG"> -->
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+  <title>Rebuttal | Museformer</title>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header role="banner">
+
+    </header>
+
+
+    <main role="main">
+      <article itemscope itemtype="https://schema.org/BlogPosting">
+        <h1 class="entry-title" itemprop="headline">Museformer: Transformer with Fine- and Coarse-Grained Attention for Music Generation</h1>
+
+        <section itemprop="entry-text">
+
+          <div align="justify">
+            This page shows supplementary materials for rebuttal.
+          </div>
+
+          <div align="justify">
+            Click <a href="https://museformer.github.io/">here</a> to the original demo page.
+          </div>
+
+          <!-- <ol class="toc-list">
+            <li>
+              <a href="#link_to_heading">
+                <span class="title">Chapter or subsection title</span>
+                <span class="page">Page 1</span>
+              </a>
+          
+              <ol>
+                <!-- subsection items
+              </ol>
+            </li>
+          </ol> -->
+
+          <h2>Dataset Bar-Pair Similarity Statistics</h2>
+          <p>To see the music structures of different genres and datasets and check whether our structure-related bar pattern is widely applicable, we do the similarity statistics: We compute the similarities between each pair of bars within a song, and see the similarity distribution with respect to the distance between two bars. Here, the similarity is defined as the number of the common notes over the size of the union set of notes of the two bars, so its value should range from 0.0 to 1.0. Two notes are considered equal when their onsets within their bars, pitches, and durations are all the same. For each song, we would obtain a self-similarity matrix, whose size is num_bars X num_bars. Then, we compute the similarity distribution with respect to the distance between two bars, which shows the average value of similarities between two bars at each specific distance. The datasets and the results are as follows.</p>
+
+          <h3>LMD (TopMAGD)</h3>
+          The widely used MIDI dataset, Lakh MIDI (LMD), contains songs of various genres. The <a href="http://www.ifs.tuwien.ac.at/mir/msd/TopMAGD.html">TopMAGD dataset</a> annotates the genre labels to many songs, a part of which is matched to songs in LMD. There are altogether 13 genres: Pop/Rock, Electronic, Rap, Jazz, Latin, R&B, International, Country, Reggae, Blues, Vocal, Folk, and New Age. We utilize the genre labels provided by TopMAGD to sort the LMD songs, and then do the statistics for each genre. The similarity is computed for the melody track. The results are shown below. Note that we omit the similarity when distance is 0, since it is always equal to 1.
+
+          These 13 genres should cover most songs we listen to in daily life. As you may see from the figures, for all of the genres, the similarities at distance 1, 2, and multiples of 4 are generally higher than others, which means music tend to repeat or largely refer to previous bars at these distances. This demonstrates our selection of the structure-related bars in the paper, i.e., the previous 1st, 2nd, 4th, 8th, 16th, 24th, 32th bars are selected as the structure-related bars and are directly attended to via the fine-grained attention, is general to various of genres.
+
+          <figure>
+            <figcaption>Pop Music</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Pop_Rock-basic-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Electronic</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Electronic-basic-1482-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Rap</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Rap-basic-186-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Jazz</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Jazz-basic-759-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Latin</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Latin-basic-758-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>R&B</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/RnB-basic-1240-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>International</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/International-basic-588-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Country</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Country-basic-1152-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Reggae</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Reggae-basic-41-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Blues</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Blues-basic-52-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Vocal</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Vocal-basic-365-40.png">
+          </figure>
+
+          <figure>
+            <figcaption>Folk</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/Folk-basic-103.png">
+          </figure>
+
+          <figure>
+            <figcaption>New Age</figcaption>
+            <img src="rebuttal_materials/similarity/lmd/NewAge-basic-258-40.png">
+          </figure>
+
+        <h3>Symphony</h3>
+
+        We also do the same statistics on a large-scale <a href="https://github.com/symphonynet/SymphonyNet">symphony dataset</a>. This dataset is composed of classical and contemporary multi-track symphony performances. Since it is hard to tell which is the melody track of a symphony performance, we use the average similarity over all the tracks. The results are shown in the following figure. It shows that our structure-related bar selection can also be reasonably applicable to this dataset. 
+
+        <figure>
+          <figcaption>Symphony Dataset</figcaption>
+          <img src="rebuttal_materials/similarity/symphony/symphony.png">
+        </figure>
+        <br />
+        In conclusion, through these statistics results, we can see that our structure-related bar selection can generalize to other genres and datasets, and should cover most of the music we involve with in our daily life. Note that we only chose 8 bars as the structure-related bars in our paper is because it is a trade-off between model performances and efficiency. <b>Our high-level idea that fine-grained attention is for important contents and coarse-grained attention is for other contextual information, is universally fittable for music data. Our model can be easily adapted to more structure-related bars or even any other music structures by simply changing a set of hyperparameters in the implementation.</b>
+
+        <br /><br />
+        <p>If anything is not clear enough to you, please feel free to ask us or have a discussion with us.</p>
+        <p>Thank you for everything &#128151;!</p>
+
+        </section>
+      </article>
+    </main>
+
+
+
+
+  </div>
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-139981676-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+         HTML: ["input/TeX","output/HTML-CSS"],
+         TeX: {
+                Macros: {
+                         bm: ["\\boldsymbol{#1}", 1],
+                         argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+                         argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+                extensions: ["AMSmath.js","AMSsymbols.js"],
+                equationNumbers: { autoNumber: "AMS" } },
+         extensions: ["tex2jax.js"],
+         jax: ["input/TeX","output/HTML-CSS"],
+         tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true },
+         "HTML-CSS": { availableFonts: ["TeX"],
+                       linebreaks: { automatic: true } }
+     });
+ </script>
+
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+       }
+     });
+ </script>
+
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+
+
+
+</body>
+
+</html>
