@@ -504,21 +504,152 @@
                             </div>
                         </section>
 
-                        <br/>
-                        <p>From the SSMs of the generated demos, we can see that there are many similar bars in the demos, and the music pieces tend to repeat or
-                        imitate the previous bars at the distance of 1, 2, 4, 8, ..., which manifests reasonable
-                        structures. Note that there are also many places where the similarities are larger than 0.0 and
-                        less than 1, and it means that these bars are similar and also have variations between them. If
-                        you watch the videos on <a href="https://museformer.github.io/">the demo page</a>, you will also
-                        find that there are many variations on the melody track, let alone that in many cases, the
-                        accompaniment tracks can be completely different for the similar melody. Therefore, Museformer
-                        can model both repetitions and variations, the combination of which makes good music structures
-                        of the generated music.</p>
+                        <br />
+                        <p>From the SSMs of the generated demos, we can see that there are many similar bars in the
+                            demos, and the music pieces tend to repeat or
+                            imitate the previous bars at the distance of 1, 2, 4, 8, ..., which manifests reasonable
+                            structures. Note that there are also many places where the similarities are larger than 0.0
+                            and
+                            less than 1, and it means that these bars are similar and also have variations between them.
+                            If
+                            you watch the videos on <a href="https://museformer.github.io/">the demo page</a>, you will
+                            also
+                            find that there are many variations on the melody track, let alone that in many cases, the
+                            accompaniment tracks can be completely different for the similar melody. Therefore,
+                            Museformer
+                            can model both repetitions and variations, the combination of which makes good music
+                            structures
+                            of the generated music.</p>
 
-                        <p>If we compare different tracks of a generated demo, we can see that, in general, the melody tends to repeat at a specific distance, while the accompaniment tracks usually follow a simple pattern and repeat more. This also fits our experiences in music. However, this is not always true for every song. For example, the bass track of demo 1 rarely repeat, which is mainly due to the bass is only played in a few bars. Also, the similarity pattern is different for every song, showing the diversity of music.</p>
+                        <p>If we compare different tracks of a generated demo, we can see that, in general, the melody
+                            tends to repeat at a specific distance, while the accompaniment tracks usually follow a
+                            simple pattern and repeat more. This also fits our experiences in music. However, this is
+                            not always true for every song. For example, the bass track of demo 1 rarely repeat, which
+                            is mainly due to the bass is only played in a few bars. Also, the similarity pattern is
+                            different for every song, showing the diversity of music.</p>
 
-                        <p>Also, we can see that the generated demos manifest similar characteristics to the training samples. It indicates that our method can successfully model the music structures.</p>
+                        <p>Also, we can see that the generated demos manifest similar characteristics to the training
+                            samples. It indicates that our method can successfully model the music structures.</p>
 
+
+                    </section>
+
+                    <section id="maestro">
+                        <h2>Experiments on Maestro</h2>
+                        
+                        <section id="maestro_results">
+                            <h3>Results</h3>
+                            The following table shows the results of objective evaluation, where perplexity (PPL) is used as the metric.
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center"></th>
+                                        <th style="text-align: center; padding-left: 80px; padding-right: 80px;">PPL (1,024)</th>
+                                        <th style="text-align: center; padding-left: 80px; padding-right: 80px;">PPL (5,120)</th>
+                                        <th style="text-align: center; padding-left: 80px; padding-right: 80px;">PPL (10,240)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left">Music Transformer</td>
+                                        <td>5.04</td>
+                                        <td>10.92</td>
+                                        <td>13.17</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Transformer-XL</td>
+                                        <td><b>4.16</b></td>
+                                        <td>4.17</td>
+                                        <td>4.18</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Longformer</td>
+                                        <td>4.17</td>
+                                        <td>4.26</td>
+                                        <td>4.30</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Linear Transformer</td>
+                                        <td>5.06</td>
+                                        <td>5.22</td>
+                                        <td>5.33</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Museformer (ours)</td>
+                                        <td><b>4.16</b></td>
+                                        <td><b>4.12</b></td>
+                                        <td><b>4.12</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            The following table shows the results of subjective evaluation, where we use the metrics presented in the paper.
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center"></th>
+                                        <th style="text-align: center; padding-left: 80px; padding-right: 80px;">Musicality</th>
+                                        <th style="text-align: center; padding-left: 80px; padding-right: 80px;">ST Structure</th>
+                                        <th style="text-align: center; padding-left: 80px; padding-right: 80px;">LT Structure</th>
+                                        <th style="text-align: center; padding-left: 80px; padding-right: 80px;">Overall</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left">Music Transformer</td>
+                                        <td>4.50±1.12</td>
+                                        <td>4.33±1.11</td>
+                                        <td>3.00±0.82</td>
+                                        <td>4.67±1.37</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Transformer-XL</td>
+                                        <td>5.17±1.67</td>
+                                        <td>4.50±1.50</td>
+                                        <td><b>3.83±1.67</b></td>
+                                        <td>5.33±1.25</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Longformer</td>
+                                        <td>5.00±1.53</td>
+                                        <td>4.67±0.75</td>
+                                        <td>3.33±1.11</td>
+                                        <td>5.00±1.63</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Linear Transformer</td>
+                                        <td>4.83±1.57</td>
+                                        <td>4.00±1.15</td>
+                                        <td>3.50±1.26</td>
+                                        <td>4.83±2.27</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left">Museformer (ours)</td>
+                                        <td><b>5.50±1.12</b></td>
+                                        <td><b>4.83±1.07</b></td>
+                                        <td><b>3.83±0.90</b></td>
+                                        <td><b>5.67±1.60</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </section>
+
+                        <section id="maestro_analysis">
+                            <h3>Analysis</h3>
+                            The following figure shows the score of a MIDI file in the Maestro dataset. The note onsets and durations are not calibrated, which is an obvious problem existed in almost all samples in this dataset. This problem makes it hard to accurately model the music structures.
+
+                            <figure>
+                                <img src="rebuttal_materials/maestro/maestro_sheet-01.png">
+                            </figure>
+
+                            We also compute the similarity distribution on the Maestro dataset using the approach introduced in <a href="#dataset_analysis">the first section</a>, as shown in the following figure. Note that the ordinate numbers are very small, which indicates that the similarity between each pair of bars is very small and thus this dataset shows nearly no music structures in the samples. 
+
+                            <figure>
+                                <img src="rebuttal_materials/maestro/maestro.png">
+                            </figure>
+
+                        </section>
 
                     </section>
 
@@ -549,6 +680,12 @@
                             <li class=""><a href="#ssm_demo3">Demo 3</a></li>
                             <li class=""><a href="#ssm_demo4">Demo 4</a></li>
                             <li class=""><a href="#ssm_train">Training Samples</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#maestro">Experiments on Maestro</a>
+                        <ul>
+                            <li class=""><a href="#maestro_results">Results</a></li>
+                            <li class=""><a href="#maestro_analysis">Analysis</a></li>
                         </ul>
                     </li>
                 </ol>
